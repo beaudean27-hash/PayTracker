@@ -186,7 +186,7 @@ export default function AuthPage({ onLogin, onSignup }) {
             </div>
           )}
 
-          {(!isLoginMode || !noPassword) && !usernameHasNoPassword && (
+          {((isLoginMode && !usernameHasNoPassword) || (!isLoginMode && !noPassword)) && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {usePin && !isLoginMode ? 'PIN' : 'Password'}
