@@ -296,6 +296,10 @@ export default function AuthPage({ onLogin, onSignup }) {
             </p>
           </div>
         )}
+
+        <div className="mt-6 text-center text-gray-500 text-sm">
+          Version 1.0.0
+        </div>
       </div>
     </div>
   );
