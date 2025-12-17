@@ -228,102 +228,102 @@ export default function WorkPaymentTracker() {
   const filteredDays = getFilteredDays();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <Calendar className="w-8 h-8 text-indigo-600" />
+        <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-8">
+          <div className="flex items-center justify-between mb-6 sm:mb-8 flex-wrap gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">Work & Payment Tracker</h1>
-                <p className="text-sm text-gray-600">Logged in as: {currentUser?.username}</p>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Work & Payment Tracker</h1>
+                <p className="text-xs sm:text-sm text-gray-600">Logged in as: {currentUser?.username}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setShowSettings(true)}
-                className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+                className="flex items-center gap-1 sm:gap-2 bg-gray-200 text-gray-700 px-2 sm:px-4 py-2 rounded-lg hover:bg-gray-300 transition text-sm sm:text-base"
                 title="Account Settings"
               >
-                <Settings className="w-5 h-5" />
-                Settings
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Settings</span>
               </button>
               <button
                 onClick={logout}
-                className="flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition"
+                className="flex items-center gap-1 sm:gap-2 bg-gray-200 text-gray-700 px-2 sm:px-4 py-2 rounded-lg hover:bg-gray-300 transition text-sm sm:text-base"
                 title="Logout"
               >
-                <LogOut className="w-5 h-5" />
-                Logout
+                <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
-              <div className="text-red-600 text-sm font-semibold mb-1">Unpaid Days</div>
-              <div className="text-3xl font-bold text-red-700">{stats.unpaidDays}</div>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-2 sm:p-4">
+              <div className="text-red-600 text-xs sm:text-sm font-semibold mb-1">Unpaid Days</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-red-700">{stats.unpaidDays}</div>
             </div>
-            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4">
-              <div className="text-green-600 text-sm font-semibold mb-1">Paid Days</div>
-              <div className="text-3xl font-bold text-green-700">{stats.paidDays}</div>
+            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-2 sm:p-4">
+              <div className="text-green-600 text-xs sm:text-sm font-semibold mb-1">Paid Days</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-green-700">{stats.paidDays}</div>
             </div>
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-              <div className="text-blue-600 text-sm font-semibold mb-1">Total Days</div>
-              <div className="text-3xl font-bold text-blue-700">{stats.totalDays}</div>
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-2 sm:p-4">
+              <div className="text-blue-600 text-xs sm:text-sm font-semibold mb-1">Total Days</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700">{stats.totalDays}</div>
             </div>
           </div>
 
           {/* Add Work Day Button */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <button
               onClick={() => setShowAddForm(!showAddForm)}
-              className="flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center gap-2 sm:gap-3 bg-indigo-600 text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <Plus className="w-6 h-6" />
-              <span className="text-lg font-semibold">Add Work Day</span>
+              <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="text-base sm:text-lg font-semibold">Add Work Day</span>
             </button>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mb-6 border-b-2 border-gray-200">
+          <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 border-b-2 border-gray-200 overflow-x-auto">
             <button
               onClick={() => setActiveTab('unpaid')}
-              className={`px-6 py-3 font-semibold transition ${
+              className={`px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold transition whitespace-nowrap ${
                 activeTab === 'unpaid'
                   ? 'text-red-600 border-b-2 border-red-600 -mb-0.5'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              Unpaid Days ({stats.unpaidDays})
+              Unpaid ({stats.unpaidDays})
             </button>
             <button
               onClick={() => setActiveTab('history')}
-              className={`px-6 py-3 font-semibold transition ${
+              className={`px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold transition whitespace-nowrap ${
                 activeTab === 'history'
                   ? 'text-green-600 border-b-2 border-green-600 -mb-0.5'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              Payment History ({stats.paidDays})
+              History ({stats.paidDays})
             </button>
             <button
               onClick={() => setActiveTab('deleted')}
-              className={`px-6 py-3 font-semibold transition ${
+              className={`px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold transition whitespace-nowrap ${
                 activeTab === 'deleted'
                   ? 'text-gray-600 border-b-2 border-gray-600 -mb-0.5'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              Deleted Days ({stats.deletedDays})
+              Deleted ({stats.deletedDays})
             </button>
           </div>
 
           {/* Add Form */}
           {showAddForm && (
-            <div className="bg-gray-50 rounded-lg p-6 mb-6 border-2 border-indigo-200">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">Add Work Day</h2>
+            <div className="bg-gray-50 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-indigo-200">
+              <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Add Work Day</h2>
               <style>{`
                 input[type="date"]::-webkit-calendar-picker-indicator {
                   font-size: 1.5rem;
@@ -331,27 +331,27 @@ export default function WorkPaymentTracker() {
                   padding: 4px;
                 }
               `}</style>
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Date Worked
                   </label>
                   <input
                     type="date"
                     value={newDate}
                     onChange={(e) => setNewDate(e.target.value)}
-                    className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     style={{ fontSize: '16px', minHeight: '48px' }}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                     Day Type
                   </label>
                   <select
                     value={dayType}
                     onChange={(e) => setDayType(e.target.value)}
-                    className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     style={{ fontSize: '16px', minHeight: '48px' }}
                   >
                     <option value="full">Full Day</option>
@@ -359,10 +359,10 @@ export default function WorkPaymentTracker() {
                   </select>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 <button
                   onClick={addWorkDay}
-                  className="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+                  className="flex-1 bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm sm:text-base"
                 >
                   Add Day
                 </button>
@@ -640,6 +640,11 @@ export default function WorkPaymentTracker() {
           onChangePassword={changePassword}
         />
       )}
+
+      {/* Version Number */}
+      <div className="text-center py-4 text-gray-500 text-sm">
+        Version 1.0.0
+      </div>
     </div>
   );
 }
