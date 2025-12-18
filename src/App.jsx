@@ -20,6 +20,7 @@ export default function WorkPaymentTracker() {
   const [permanentDeleteDoubleConfirmId, setPermanentDeleteDoubleConfirmId] = useState(null);
   const [permanentDeleteTripleConfirmId, setPermanentDeleteTripleConfirmId] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' = oldest first, 'desc' = newest first
 
   // Load data from storage on mount
   useEffect(() => {
@@ -56,9 +57,7 @@ export default function WorkPaymentTracker() {
       addedOn: new Date().toISOString()
     };
 
-    const updatedDays = [...workDays, newDay].sort((a, b) => 
-      new Date(b.date) - new Date(a.date)
-    );
+    const updatedDays = [...workDays, newDay];
     
     setWorkDays(updatedDays);
     saveWorkDays(updatedDays);
@@ -185,7 +184,7 @@ export default function WorkPaymentTracker() {
       day.id === editingId
         ? { ...day, date: editDate, type: editDayType }
         : day
-    ).sort((a, b) => new Date(b.date) - new Date(a.date));
+    );
 
     setWorkDays(updatedDays);
     saveWorkDays(updatedDays);
@@ -215,13 +214,21 @@ export default function WorkPaymentTracker() {
   };
 
   const getFilteredDays = () => {
+    let filtered;
     if (activeTab === 'unpaid') {
-      return workDays.filter(day => !day.paid && !day.deleted);
+      filtered = workDays.filter(day => !day.paid && !day.deleted);
     } else if (activeTab === 'history') {
-      return workDays.filter(day => day.paid && !day.deleted);
+      filtered = workDays.filter(day => day.paid && !day.deleted);
     } else {
-      return workDays.filter(day => day.deleted);
+      filtered = workDays.filter(day => day.deleted);
     }
+    
+    // Sort by date based on sortOrder
+    return filtered.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+    });
   };
 
   const stats = calculateStats();
@@ -283,6 +290,18 @@ export default function WorkPaymentTracker() {
             >
               <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
               <span className="text-base sm:text-lg font-semibold">Add Work Day</span>
+            </button>
+          </div>
+
+          {/* Sort Controls */}
+          <div className="flex justify-end mb-3">
+            <button
+              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-xs sm:text-sm font-medium"
+              title={sortOrder === 'asc' ? 'Currently showing oldest first. Click to show newest first.' : 'Currently showing newest first. Click to show oldest first.'}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>{sortOrder === 'asc' ? '↑ Oldest First' : '↓ Newest First'}</span>
             </button>
           </div>
 
